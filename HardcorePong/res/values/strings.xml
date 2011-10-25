@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, HardcorePongActivity!</string>
+    <string name="app_name">HardcorePong</string>
+    <string name="menu_bluetooth_server">Bluetooth Server</string>
+    <string name="menu_bluetooth_client">Bluetooth Client</string>
+    <string name="single_play">SinglePlayer</string>
+    <string name="multi_play">MultiPlayer</string>    
+    <string name="bt_not_active">Your cellphone does not support bluetooth, multiplayer is disabled!</string>    
+    <string name="bt_turn_on_error">Bluetooth could not be activated!</string>    
+    <string name="multi_play_server_bt">Act as a bluetooth server</string>    
+    <string name="multi_play_client_bt">Act as a bluetooth client</string>    
+    <string name="user_cancel_bt_disover">Can not start acting as a bluetooth server without discoverable functionality on!</string>    
+    <string name="server_waiting">Waiting for clients (press Return to cancel)...</string>    
+    <string name="client_waiting">Searching for online phones...</string>    
+    <string name="server_fail">Server timeout, please try again.</string>    
+    <string name="client_fail">Could not connect to the device, please try again.</string>    
+    
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="end_search">Search ended.</string>
+    <string name="title_paired_devices">Known devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    <string name="client_new_devices_found">New device found. Check them at the end of the list.</string>
+</resources>
