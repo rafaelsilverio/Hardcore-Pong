@@ -55,8 +55,8 @@ public class PongMultiple extends SurfaceView implements SurfaceHolder.Callback 
 		//Se ainda contem caracteres, envia ao gamestate
 		if(mensagem.length() > 0){
 
-			//Se nao tiver underscore e mais de um caractere, recebe apenas o ultimo caractere enviado
-			if(!mensagem.contains("_") && mensagem.length() > 1){
+			//Se nao tiver underscore e mais de um caractere, recebe apenas o primeiro caractere enviado
+			if(!mensagem.contains(JogoMultiplayer.SEPARADOR_VALORES) && mensagem.length() > 1){
 				mensagem = mensagem.substring(0);	
 			}
 			

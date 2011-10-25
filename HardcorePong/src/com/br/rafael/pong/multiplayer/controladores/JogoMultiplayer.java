@@ -13,6 +13,9 @@ public class JogoMultiplayer extends JogoPrincipal {
 	public final static String ESTATICO = "S";
 	public final static String RESPOSTA_CLIENTE = "R";
 	
+	//Declara separador das strings de envio de posicao
+	public final static String SEPARADOR_VALORES = "_";
+	
 	/**
 	 * Inicia e instancia classe pai
 	 * 
@@ -65,10 +68,10 @@ public class JogoMultiplayer extends JogoPrincipal {
 		
 		//Monta a string com as posicoes dos players e da bola, sendo que as posicoes sao frações da dimensao do celular
 		String snapShot = "";
-		snapShot += getPlayer1().getPosX() / getLarguraJogo() + "_" + getPlayer1().getPosY() / getAlturaJogo() + "_";
-		snapShot += getPlayer2().getPosX() / getLarguraJogo() + "_" + getPlayer2().getPosY() / getAlturaJogo() + "_";
-		snapShot += getBolaInicial().getPosX() / getLarguraJogo() + "_" + getBolaInicial().getPosY() / getAlturaJogo() + "_";
-		snapShot += getPlayer1().getPlacar().getPontuacao()  + "_" + getPlayer2().getPlacar().getPontuacao() + "_";
+		snapShot += getPlayer1().getPosX() / getLarguraJogo() + SEPARADOR_VALORES + getPlayer1().getPosY() / getAlturaJogo() + SEPARADOR_VALORES;
+		snapShot += getPlayer2().getPosX() / getLarguraJogo() + SEPARADOR_VALORES + getPlayer2().getPosY() / getAlturaJogo() + SEPARADOR_VALORES;
+		snapShot += getBolaInicial().getPosX() / getLarguraJogo() + SEPARADOR_VALORES + getBolaInicial().getPosY() / getAlturaJogo() + SEPARADOR_VALORES;
+		snapShot += getPlayer1().getPlacar().getPontuacao()  + SEPARADOR_VALORES + getPlayer2().getPlacar().getPontuacao() + SEPARADOR_VALORES;
 		
 		//Retorna a string final
 		return snapShot;
@@ -80,7 +83,7 @@ public class JogoMultiplayer extends JogoPrincipal {
 	public void atualizaPosicoesClient(String snapsShotServidor){
 		
 		//Recebe a lista de posicoes
-		String[] posicoes = snapsShotServidor.split("_");
+		String[] posicoes = snapsShotServidor.split(SEPARADOR_VALORES);
 		
 		//Tenta receber os valores
 		try{
