@@ -102,4 +102,29 @@ public class JogoMultiplayer extends JogoPrincipal {
 			
 		}
 	}
+	
+	/**
+	 * Atualizações feitas pelo cliente no jogo multiplayer
+	 */
+	public void atualizaJogoClient(){
+		
+		//Recebe o resultado da verificacao de colisao com player
+		boolean colisaoP1 = getPlayer1().verificaColisao(getBolaInicial());
+		boolean colisaoP2 = getPlayer1().verificaColisao(getBolaInicial());
+		
+		//Se colidiu com algum player
+		if(colisaoP1 || colisaoP2){
+			
+			//Altera cor da bola
+			getBolaInicial().reduzColoracao();
+			
+			//Define para o player que houve uma colisao
+			if(colisaoP1){
+				getPlayer1().setColidiu(true);
+			}
+			else{
+				getPlayer2().setColidiu(true);
+			}
+		}		
+	}
 }

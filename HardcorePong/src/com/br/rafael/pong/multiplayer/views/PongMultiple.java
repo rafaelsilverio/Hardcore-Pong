@@ -97,9 +97,11 @@ public class PongMultiple extends SurfaceView implements SurfaceHolder.Callback 
 			int movimentoRealizado;
 			if(threadJogo.getGameState().getAcaoSubir().verificaColisao(event.getX(), event.getY())){
 				movimentoRealizado = Jogador.MOVIMENTO_ACIMA;
+				threadJogo.getGameState().getAcaoSubir().setDesaparecer(true);
 			}
 			else if(threadJogo.getGameState().getAcaoDescer().verificaColisao(event.getX(), event.getY())){
 				movimentoRealizado = Jogador.MOVIMENTO_ABAIXO;
+				threadJogo.getGameState().getAcaoDescer().setDesaparecer(true);
 			}
 			else{
 				movimentoRealizado = Jogador.MOVIMENTO_NULO;

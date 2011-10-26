@@ -163,6 +163,9 @@ public class MultiplayerGame extends Thread{
 					//Cria um objeto canvas representando a tela (travando a superficie)
 					Canvas canvas = superficie.lockCanvas();				
 					
+					//Define atualizacao apenas de clientes
+					jogoPrincipal.atualizaJogoClient();
+					
 					//Desenha na tela
 					jogoPrincipal.desenha(canvas, paint);	
 					

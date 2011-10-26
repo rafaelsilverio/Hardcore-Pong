@@ -149,8 +149,27 @@ public class Bola extends Circulo {
 			numeroMaximoAceleracoes--;
 			
 			//Reduz a coloração verde (ficando cada vez mais vermelho)
-			setVerde(getVerde() - (copiaVede / copiaNumeroMaximoAceleracoes));
+			reduzColoracao();
 		}
+	}
+	
+	/**
+	 * Reduz a coloracao de verde da bola
+	 */
+	public void reduzColoracao(){
+		
+		//Impede valores negativos
+		if(getVerde() - (copiaVede / copiaNumeroMaximoAceleracoes) > 0){
+			
+			//Reduz a coloração verde (ficando cada vez mais vermelho)
+			setVerde(getVerde() - (copiaVede / copiaNumeroMaximoAceleracoes));			
+		}
+		else{
+			
+			//Define como zero
+			setVerde(0);
+		}
+		
 	}
 	
 	/* Getters e setters padrão */
