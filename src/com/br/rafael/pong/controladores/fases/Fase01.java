@@ -7,12 +7,16 @@ import com.br.rafael.pong.controladores.base.BaseJogo;
 
 public class Fase01 extends BaseJogo {
 
+	//Define pontuação para terminar o jogo
+	static final int PONTOS_PARTIDA = 1;
+	
 	public Fase01(int alturaJogo, int larguraJogo) {
 		super(alturaJogo, larguraJogo);
 		instanciaP1();
 		instanciaP2();
 		instanciaBotoesAcao();
 		instanciaBolaPrincipal();
+		iniciaModalFimJogo();
 		
 		//Define as cores dos players
 		getPlayer2().defineCores(255, 255, 0, 0);
@@ -20,28 +24,28 @@ public class Fase01 extends BaseJogo {
 
 	@Override
 	public void desenha(Canvas canvas, Paint paint) {
+		super.desenha(canvas, paint);
 		
 		//Checa se o jogo acabou
-		if(!isFimJogo()){
+		if(!isFimJogo()){			
 			
 			//Verifica se alguem ganhou
-			if(getPlayer1().getPlacar().getPontuacao() == 1 || getPlayer2().getPlacar().getPontuacao() == 1){
+			if(getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA || getPlayer2().getPlacar().getPontuacao() == PONTOS_PARTIDA){
+				
+				//Define flag que para o jogo
 				setFimJogo(true);
 				
-				//Se p1 ganhou
-				if(getPlayer1().getPlacar().getPontuacao() == 5){
-					canvas.drawText("YOU WIN!", getLarguraJogo()/2, getAlturaJogo()/2, paint);
-				}
+				//Atualiza mais uma vez a tela
+				super.atualiza();
 				
-				//Se p2 ganhou
-				else{
-					canvas.drawText("YOU LOSE!", getLarguraJogo()/2, getAlturaJogo()/2, paint);
-				}
+				//Exibe saida para o usuario
+				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA));
 			}
-			//Desenha normalmente apenas se alguem ainda não ganhou
-			else{
-				super.desenha(canvas, paint);	
-			}			
+		}
+		else {
+			
+			//Exibe a mensagem de termino da partida
+			super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA));
 		}
 	}
 	
@@ -54,5 +58,4 @@ public class Fase01 extends BaseJogo {
 			atualizaIAP2(1);			
 		}
 	}
-
 }

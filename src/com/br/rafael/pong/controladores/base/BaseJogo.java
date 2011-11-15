@@ -2,7 +2,9 @@ package com.br.rafael.pong.controladores.base;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
+import com.br.rafael.pong.elementos.bases.Retangulo;
 import com.br.rafael.pong.elementos.pong.Bola;
 import com.br.rafael.pong.elementos.pong.BotaoAcao;
 import com.br.rafael.pong.elementos.pong.Jogador;
@@ -21,6 +23,7 @@ public class BaseJogo implements Jogo {
 	private Bola bolaInicial;
 	private BotaoAcao acaoSubir;
 	private BotaoAcao acaoDescer;
+	private Retangulo modalFimJogo;
 	
 	//Mantem como atributo as dimensoes maximas do jogo
 	private int alturaJogo;
@@ -36,6 +39,7 @@ public class BaseJogo implements Jogo {
 	private float proporcaoVelicidadeJogadores = (float) 0.018;
 	private float proporcaoVelicidadeBola = (float) 0.00875;
 	private float proporcaoAceleradorBola = (float) 0.00032;
+	private float proporcaoModalFimJogo = (float) 0.80;
 	
 	//Declara os valores brutos, após calculo de proporcao com o tamanho da tela do celular
 	private float distanciaPlayersLaterais;
@@ -47,6 +51,18 @@ public class BaseJogo implements Jogo {
 	private float larguraPlayer;
 	private float posicaoYPlayers;
 	private float raioBola;
+	private float larguraModal;
+	private float alturaModal;
+	
+	/**
+	 * Instancia a modal que exibe mensagem de fim de jogo
+	 */
+	public void iniciaModalFimJogo(){
+		modalFimJogo = new Retangulo(getMetadeTelaX() - larguraModal/2, 
+				getMetadeTelaY() - alturaModal/2, 
+				alturaModal, larguraModal);
+		modalFimJogo.defineCores(255, 65, 105, 225);
+	}
 	
 	/**
 	 * Inicia e instancia o player 1
@@ -121,6 +137,10 @@ public class BaseJogo implements Jogo {
 		
 		//Define raio da bola
 		raioBola = larguraJogo * proporcaoRaioBola;
+		
+		//Define proporcoes de modal
+		larguraModal = larguraJogo * proporcaoModalFimJogo;
+		alturaModal =  alturaJogo * proporcaoModalFimJogo;
 	}
 
 	
@@ -358,8 +378,42 @@ public class BaseJogo implements Jogo {
 			bolaInicial.setEscalarY(distanciaCentro);
 		}		
 	}	
+
+	/**
+	 * Método que exibe finalização de partida
+	 * 
+	 * @param canvas
+	 * @param paint
+	 * @param vencedor false para perdeu, true para ganhou
+	 */
+	public void terminaPartida(Canvas canvas, Paint paint, boolean venceu){
+		
+		//Define a mensagem de vitoria ou derrota
+		String mensagem = venceu ? "YOU WIN!" : "YOU LOSE!";
+		
+		//Exibe efeito de desabilitacao da tela
+		paint.setARGB(150, 47, 79, 79);
+		canvas.drawRect(0, 0, larguraJogo, alturaJogo, paint);
+		
+		//Recebe o objeto de retangulo que engloba o texto a ser exibido
+		Rect textoHolder = new Rect();
+		paint.getTextBounds(mensagem, 0, mensagem.length(), textoHolder);
+		
+		//Exibe um retangulo que envolve a mensagem
+		modalFimJogo.desenha(canvas, paint);
+		
+		//Exibe texto na tela
+		paint.setARGB(200, 255, 255, 255);
+		canvas.drawText(mensagem, (getLarguraJogo()/2) - (textoHolder.width()/2) , (getAlturaJogo()/2) + (textoHolder.height()/2), paint);
+	}
 	
 	/* Getters e Setters padrão */
+	public float getMetadeTelaX(){
+		return (getLarguraJogo()/2);
+	}
+	public float getMetadeTelaY(){
+		return (getAlturaJogo()/2);
+	}	
 	public Jogador getPlayer1() {
 		return player1;
 	}
@@ -407,5 +461,8 @@ public class BaseJogo implements Jogo {
 	}
 	public void setFimJogo(boolean fimJogo) {
 		this.fimJogo = fimJogo;
+	}
+	public Retangulo getModalFimJogo() {
+		return modalFimJogo;
 	}	
 }
