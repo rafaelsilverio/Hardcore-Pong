@@ -9,6 +9,12 @@ import com.br.rafael.pong.elementos.pong.Bola;
 import com.br.rafael.pong.elementos.pong.BotaoAcao;
 import com.br.rafael.pong.elementos.pong.Jogador;
 
+/**
+ * Classe base para o jogo, deve ser extendida por suas fases
+ * 
+ * @author Rafael
+ *
+ */
 public class BaseJogo implements Jogo {
 
 	//Mantem flag que configura jogo multiplayer ou single
