@@ -46,23 +46,31 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 			telaPressionada = false;			
 		}
 
+		//Recebe a instancia do jogo
+		BaseJogo jogoAtual = (BaseJogo) threadJogo.getGameState();
+		
 		//Sinaliza para a thread o estado atual da tela
-		((BaseJogo) threadJogo.getGameState()).getPlayer1().setMovimento(telaPressionada);
+		jogoAtual.getPlayer1().setMovimento(telaPressionada);
 		
 		//Se a tela esta sendo pressionada
 		if(telaPressionada){
 			
 			//Move para cima, se for o caso
-			if(((BaseJogo) threadJogo.getGameState()).getAcaoSubir().verificaColisao(event.getX(), event.getY())){
-				((BaseJogo) threadJogo.getGameState()).getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_ACIMA);
-				((BaseJogo) threadJogo.getGameState()).getAcaoSubir().setDesaparecer(true);
+			if(jogoAtual.getAcaoSubir().verificaColisao(event.getX(), event.getY())){
+				jogoAtual.getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_ACIMA);
+				jogoAtual.getAcaoSubir().setDesaparecer(true);
 			}
-			else if(((BaseJogo) threadJogo.getGameState()).getAcaoDescer().verificaColisao(event.getX(), event.getY())){
-				((BaseJogo) threadJogo.getGameState()).getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_ABAIXO);
-				((BaseJogo) threadJogo.getGameState()).getAcaoDescer().setDesaparecer(true);
+			else if(jogoAtual.getAcaoDescer().verificaColisao(event.getX(), event.getY())){
+				jogoAtual.getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_ABAIXO);
+				jogoAtual.getAcaoDescer().setDesaparecer(true);
 			}
 			else
-				((BaseJogo) threadJogo.getGameState()).getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_NULO);
+				jogoAtual.getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_NULO);
+			
+			//Se o jogo se encontra parado e o usuário tocar no modal, chama a ação correspondente
+			if(jogoAtual.isFimJogo() && jogoAtual.getModalFimJogo().verificaColisao(event.getX(), event.getY())){
+				jogoAtual.acaoModalFinaliza();
+			}
 		}
 		
 		//Retorno que define que o metodo esta interessado em saber todos os eventos ocorridos

@@ -5,12 +5,12 @@ import android.graphics.Paint;
 
 import com.br.rafael.pong.controladores.base.BaseJogo;
 
-public class Fase01 extends BaseJogo {
+public class Fase02 extends BaseJogo {
 
 	//Define pontuação para terminar o jogo
-	static final int PONTOS_PARTIDA = 5;
+	static final int PONTOS_PARTIDA = 5;	
 	
-	public Fase01(int alturaJogo, int larguraJogo) {
+	public Fase02(int alturaJogo, int larguraJogo) {
 		super(alturaJogo, larguraJogo);
 		instanciaElementos();
 	}

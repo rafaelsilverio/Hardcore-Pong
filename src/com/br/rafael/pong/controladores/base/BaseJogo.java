@@ -8,7 +8,7 @@ import com.br.rafael.pong.elementos.bases.Retangulo;
 import com.br.rafael.pong.elementos.pong.Bola;
 import com.br.rafael.pong.elementos.pong.BotaoAcao;
 import com.br.rafael.pong.elementos.pong.Jogador;
-
+  
 public class BaseJogo implements Jogo {
 
 	//Mantem flag que configura jogo multiplayer ou single
@@ -200,7 +200,7 @@ public class BaseJogo implements Jogo {
 					player2.setMovimento(false);	
 				
 				break;
-			case 1:
+			case 9:
 				
 				//Se a bola estiver em 60% da tela de distancia do player 2, faz ele seguir a bola
 				if(bolaInicial.getPosX() > (larguraJogo * 0.4)){
@@ -219,7 +219,27 @@ public class BaseJogo implements Jogo {
 				}
 
 				
-				break;				
+				break;		
+			case 1:
+				
+				//Se a bola estiver em 30% da tela de distancia do player 2, faz ele seguir a bola
+				if(bolaInicial.getPosX() > (larguraJogo * 0.7)){
+					
+					//Move de acordo com a posicao da bolinha e relacao a seu centro, acima sobe e abaixo desce
+					player2.setMovimento(true);
+					if(bolaInicial.getPosY() > player2.pontoMedioY())
+						player2.setMovimentoAtual(Jogador.MOVIMENTO_ABAIXO);
+					else if(bolaInicial.getPosY() < player2.pontoMedioY())
+						player2.setMovimentoAtual(Jogador.MOVIMENTO_ACIMA);
+					else
+						player2.setMovimento(false);						
+				}
+				else{
+					player2.setMovimento(false);
+				}
+
+				
+				break;					
 				
 		}
 	}
@@ -406,6 +426,14 @@ public class BaseJogo implements Jogo {
 		paint.setARGB(200, 255, 255, 255);
 		canvas.drawText(mensagem, (getLarguraJogo()/2) - (textoHolder.width()/2) , (getAlturaJogo()/2) + (textoHolder.height()/2), paint);
 	}
+	
+	/**
+	 * Define o que fazer quando o usuário tocar no modal, deve ser 
+	 * implementado por cada fase
+	 */
+	public void acaoModalFinaliza(){
+		
+	}	
 	
 	/* Getters e Setters padrão */
 	public float getMetadeTelaX(){
