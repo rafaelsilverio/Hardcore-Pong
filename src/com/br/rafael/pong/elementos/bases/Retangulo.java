@@ -49,6 +49,7 @@ public class Retangulo extends Elemento{
 	 * @param canvas
 	 * @param paint
 	 */
+	@Override
 	public void desenha(Canvas canvas, Paint paint){
 		
 		//Define define a cor do elemento

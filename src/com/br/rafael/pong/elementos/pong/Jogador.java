@@ -118,6 +118,7 @@ public class Jogador extends Retangulo{
 	/**
 	 * Chama metodo pai para desenhar na tela, mas realizando acoes a mais
 	 */
+	@Override
 	public void desenha(Canvas canvas, Paint paint){
 		
 		//Define acoes de colisao

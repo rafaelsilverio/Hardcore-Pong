@@ -37,6 +37,7 @@ public class Circulo extends Elemento{
 	 * @param canvas
 	 * @param paint
 	 */
+	@Override
 	public void desenha(Canvas canvas, Paint paint){
 		
 		//Define define a cor do elemento

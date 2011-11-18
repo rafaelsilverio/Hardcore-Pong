@@ -38,6 +38,7 @@ public class Placar extends Elemento {
 	/**
 	 * Desenha o texto na tela
 	 */
+	@Override
 	public void desenha(Canvas canvas, Paint paint){
 		
 		//Configura a cor do paint

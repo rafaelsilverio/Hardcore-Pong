@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.br.rafael.pong.activity.HardcorePongActivity;
 import com.br.rafael.pong.controladores.base.BaseJogo;
 import com.br.rafael.pong.elementos.pong.Jogador;
 import com.br.rafael.pong.threads.GameThread;
@@ -18,8 +19,14 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
     //Mantem flag que diz se a tela esta sendo pressionada pelo usuário do telefone
     private Boolean telaPressionada = false;	
 	
+    //Mantem a instancia da atividade atual
+    private HardcorePongActivity atividadeAtual;
+    
 	public PongSingle(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		
+		//Recebe instancia da atividade atual
+		atividadeAtual = (HardcorePongActivity) context;
 		
     	//Declara holder para ter a capacidade de escutar eventos
         SurfaceHolder holder = getHolder();
@@ -70,6 +77,12 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 			//Se o jogo se encontra parado e o usuário tocar no modal, chama a ação correspondente
 			if(jogoAtual.isFimJogo() && jogoAtual.getModalFimJogo().verificaColisao(event.getX(), event.getY())){
 				jogoAtual.acaoModalFinaliza();
+				
+				//Se deve mudar de fase, para a thread e sinaliza para a activity q deve ser trocada a fase
+				if(jogoAtual.isProximaFase()){
+					threadJogo.pararJogo();
+					atividadeAtual.alteraFase();
+				}
 			}
 		}
 		

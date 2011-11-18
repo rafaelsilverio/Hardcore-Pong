@@ -1,5 +1,6 @@
 package com.br.rafael.pong.elementos.bases;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
@@ -60,6 +61,12 @@ public class Elemento {
 	 */
 	public void configuraCorPaint(Paint paint){
 		paint.setARGB(alpha, vermelho, verde, azul);
+	}
+	
+	/**
+	 * Método que deve ser implementado por todos que extendem elemento
+	 */
+	public void desenha(Canvas canvas, Paint paint){
 	}
 	
 	/* Getters e setters default */

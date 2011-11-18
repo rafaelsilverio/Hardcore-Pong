@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import com.br.rafael.pong.controladores.base.Jogo;
 import com.br.rafael.pong.controladores.fases.Fase01;
+import com.br.rafael.util.TransitaAtributos;
 
 public class GameThread extends Thread {
 
@@ -39,10 +40,7 @@ public class GameThread extends Thread {
 	public GameThread(SurfaceHolder surfaceHolder, Context context){
 		superficie = surfaceHolder;
 		paint = new Paint();
-		
-		//Cria uma instancia de jogo, enviando as dimensoes da tela
-		Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		jogoPrincipal = new Fase01(display.getHeight(), display.getWidth());
+		jogoPrincipal = TransitaAtributos.getInstanciaProximaFase();
 	}
 
 	/**

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.br.rafael.pong.controladores.base.BaseJogo;
+import com.br.rafael.pong.elementos.bases.Retangulo;
 
 public class Fase02 extends BaseJogo {
 
@@ -29,10 +30,15 @@ public class Fase02 extends BaseJogo {
 		iniciaModalFimJogo();
 		
 		//Define as cores dos players
-		getPlayer2().defineCores(255, 255, 0, 0);
+		getPlayer2().defineCores(255, 0, 0, 255);
 		
 		//Corta a velocidade da maquina
 		getPlayer2().setVelocidadeMovimento(getPlayer2().getVelocidadeMovimento() * 0.5f);
+		
+		//Cria uma barra de defesa para o p2
+		Retangulo defesa = new Retangulo(getPlayer2().getPosX() - getPlayer2().getLargura() , getPlayer2().getPosY() + getPlayer2().getAltura(),  getPlayer2().getAltura(), getPlayer2().getLargura());
+		defesa.defineCores(255, 201, 201, 201);
+		getElementosAvulsos().add(defesa);
 	}
 
 	@Override

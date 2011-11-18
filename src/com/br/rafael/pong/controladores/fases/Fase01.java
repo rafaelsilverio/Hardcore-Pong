@@ -8,7 +8,7 @@ import com.br.rafael.pong.controladores.base.BaseJogo;
 public class Fase01 extends BaseJogo {
 
 	//Define pontuação para terminar o jogo
-	static final int PONTOS_PARTIDA = 5;
+	static final int PONTOS_PARTIDA = 0;
 	
 	public Fase01(int alturaJogo, int larguraJogo) {
 		super(alturaJogo, larguraJogo);
@@ -53,6 +53,14 @@ public class Fase01 extends BaseJogo {
 				
 				//Exibe saida para o usuario
 				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA));
+				
+				//Se o player 1 ganhou
+				if(getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA){
+					
+					//Sinaliza que o jogador ganhou, e o proximo toque deve leva-lo para a proxima fase
+					setProximaFase(true);
+				}
+				
 			}
 		}
 		else {

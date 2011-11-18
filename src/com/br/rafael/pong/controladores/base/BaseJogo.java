@@ -1,9 +1,13 @@
 package com.br.rafael.pong.controladores.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.br.rafael.pong.elementos.bases.Elemento;
 import com.br.rafael.pong.elementos.bases.Retangulo;
 import com.br.rafael.pong.elementos.pong.Bola;
 import com.br.rafael.pong.elementos.pong.BotaoAcao;
@@ -23,6 +27,9 @@ public class BaseJogo implements Jogo {
 	//Mantem flag que define se o jogo ja acabou
 	private boolean fimJogo = false;
 	
+	//Mantem flag que define se a fase deve ser finalizada, e a próxima ser chamada
+	private boolean proximaFase = false;
+	
 	//Mantem como atributo os elementos do jogo
 	private Jogador player1;
 	private Jogador player2;
@@ -30,6 +37,9 @@ public class BaseJogo implements Jogo {
 	private BotaoAcao acaoSubir;
 	private BotaoAcao acaoDescer;
 	private Retangulo modalFimJogo;
+	
+	//Cria uma lista de elementos avulsos, que podem ser cadastrados nas fases
+	private List<Elemento> elementosAvulsos = new ArrayList<Elemento>();
 	
 	//Mantem como atributo as dimensoes maximas do jogo
 	private int alturaJogo;
@@ -170,6 +180,13 @@ public class BaseJogo implements Jogo {
 		acaoDescer.desenha(canvas, paint);
 		player1.getPlacar().desenha(canvas, paint);
 		player2.getPlacar().desenha(canvas, paint);
+		
+		//Se há elementos avulsos, percorre desenhando
+		if(!elementosAvulsos.isEmpty()){
+			for(Elemento elemento : elementosAvulsos){
+				elemento.desenha(canvas, paint);
+			}
+		}
 	}	
 	
 	/**
@@ -498,5 +515,21 @@ public class BaseJogo implements Jogo {
 	}
 	public Retangulo getModalFimJogo() {
 		return modalFimJogo;
+	}
+
+	public boolean isProximaFase() {
+		return proximaFase;
+	}
+
+	public void setProximaFase(boolean proximaFase) {
+		this.proximaFase = proximaFase;
+	}
+
+	public List<Elemento> getElementosAvulsos() {
+		return elementosAvulsos;
+	}
+
+	public void setElementosAvulsos(List<Elemento> elementosAvulsos) {
+		this.elementosAvulsos = elementosAvulsos;
 	}	
 }
