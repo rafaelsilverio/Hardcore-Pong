@@ -27,6 +27,7 @@ public class Fase01 extends BaseJogo {
 		instanciaBotoesAcao();
 		instanciaBolaPrincipal();
 		iniciaModalFimJogo();
+		setPontosPartida(PONTOS_PARTIDA);
 		
 		//Define as cores dos players
 		getPlayer2().defineCores(255, 255, 0, 0);
@@ -43,7 +44,7 @@ public class Fase01 extends BaseJogo {
 		if(!isFimJogo()){			
 			
 			//Verifica se alguem ganhou
-			if(getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA || getPlayer2().getPlacar().getPontuacao() == PONTOS_PARTIDA){
+			if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida() || getPlayer2().getPlacar().getPontuacao() == getPontosPartida()){
 				
 				//Define flag que para o jogo
 				setFimJogo(true);
@@ -52,10 +53,10 @@ public class Fase01 extends BaseJogo {
 				super.atualiza();
 				
 				//Exibe saida para o usuario
-				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA));
+				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == getPontosPartida()));
 				
 				//Se o player 1 ganhou
-				if(getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA){
+				if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida()){
 					
 					//Sinaliza que o jogador ganhou, e o proximo toque deve leva-lo para a proxima fase
 					setProximaFase(true);
@@ -66,7 +67,7 @@ public class Fase01 extends BaseJogo {
 		else {
 			
 			//Exibe a mensagem de termino da partida
-			super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == PONTOS_PARTIDA));
+			super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == getPontosPartida()));
 		}
 	}
 	

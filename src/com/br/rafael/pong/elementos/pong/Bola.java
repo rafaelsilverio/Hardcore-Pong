@@ -33,6 +33,13 @@ public class Bola extends Circulo {
 	private int copiaVede;
 	
 	/**
+	 * Construtor que inicia uma bola sem atributos definidos
+	 */
+	public Bola(){
+		super(0.0f, 0.0f, 0.0f);
+	}
+	
+	/**
 	 * Alimenta os atributos da classe
 	 * 
 	 * @param X

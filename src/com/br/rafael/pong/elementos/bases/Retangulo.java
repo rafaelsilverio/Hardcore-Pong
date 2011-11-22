@@ -22,6 +22,9 @@ public class Retangulo extends Elemento{
 	//Define a representacao de retangulo, utilizando biblioteca do android
 	private RectF retanguloAndroid;
 	
+	//Define que uma colisao ocorreu
+	private boolean colidiu = false; 
+	
 	/**
 	 * Constroi um elemento do tipo retangulo, alimentando
 	 * seus atributos de acordo com o construtor
@@ -197,5 +200,13 @@ public class Retangulo extends Elemento{
 	}
 	public void setRetanguloAndroid(RectF retanguloAndroid) {
 		this.retanguloAndroid = retanguloAndroid;
+	}
+
+	public boolean isColidiu() {
+		return colidiu;
+	}
+
+	public void setColidiu(boolean colidiu) {
+		this.colidiu = colidiu;
 	}
 }

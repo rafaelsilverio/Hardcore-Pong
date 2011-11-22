@@ -31,9 +31,6 @@ public class Jogador extends Retangulo{
 	//Mantem placar do jogador
 	private Placar placar;
 	
-	//Define que uma colisao ocorreu
-	private boolean colidiu = false;
-	
 	//Define contagem de frames que o player vai piscar
 	private int framesPiscando = 0;
 	
@@ -205,12 +202,9 @@ public class Jogador extends Retangulo{
 		this.placar = placar;
 	}
 
-	public boolean isColidiu() {
-		return colidiu;
-	}
-
+	@Override
 	public void setColidiu(boolean colidiu) {
-		this.colidiu = colidiu;
+		super.setColidiu(colidiu);
 		
 		//Define janela de frames
 		framesPiscando = numFramesPiscando;

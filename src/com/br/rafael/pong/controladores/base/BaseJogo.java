@@ -70,6 +70,9 @@ public class BaseJogo implements Jogo {
 	private float larguraModal;
 	private float alturaModal;
 	
+	//Mantem o numero de pontos que define se alguem ganhou
+	private int pontosPartida;
+	
 	/**
 	 * Instancia a modal que exibe mensagem de fim de jogo
 	 */
@@ -267,10 +270,11 @@ public class BaseJogo implements Jogo {
 		}
 	}
 	
+	
 	/**
-	 * Contem todas as verificacos sobre a atualizacao da bola inicial
+	 * Checa se a bola bate em alguma deadzone, realizando as ações necessárias
 	 */
-	public void atualizaBolaInicial(){
+	public void checagemBolaInicialDeadzone(){
 		
 		//Se a bola encosta em uma deadzone
 		if(bolaInicial.encostaDeadzone(0, larguraJogo)){
@@ -289,73 +293,45 @@ public class BaseJogo implements Jogo {
 			
 			//Inverte a direcao da bola
 			bolaInicial.setDirecaoBolaX(direcao*(-1));
-		}
-		
-		//Se a bola encostou em um dos players
-		else{
-		
-			//Recebe o resultado da verificacao de colisao com player
-			boolean colisaoP1 = player1.verificaColisao(bolaInicial);
-			boolean colisaoP2 = player2.verificaColisao(bolaInicial);
-			
-			//Se colidiu com algum player
-			if(colisaoP1 || colisaoP2){
-				
-				//Acelera o movimento
-				bolaInicial.aumentaVelocidade();
-				
-				//Define logica de colisao com a bola
-				inclinaBolaColisao(colisaoP1, colisaoP2);
-				
-				//Define para o player que houve uma colisao
-				if(colisaoP1){
-					player1.setColidiu(true);
-				}
-				else{
-					player2.setColidiu(true);
-				}
-				
-			}
-			//Checa se bateu nas laterais
-			else if(bolaInicial.encostaParede(0, alturaJogo)){
-				
-				//Inverte direcao de Y
-				bolaInicial.setDirecaoBolaY(bolaInicial.getDirecaoBolaY() * -1);				
-			}
-			
-			//Atualiza seu movimento
-			bolaInicial.movimenta();
-			
-			//Ao mover a bola, pode ocorrer uma colisão em que a bola entra no elemento, sua posicao deve ser remanejada nesse caso
-			remanejaPosicaoBola();
 		}		
 	}
 	
-	//Em caso de colisão prévia, remaneja as posicoes da bola
-	public void remanejaPosicaoBola(){
+	/**
+	 * Checa se a bola bate em alguma parede limitadora, realizando as ações necessárias
+	 */
+	public void checagemBolaInicialParedes(){
 		
-		//Recebe o resultado da verificacao de colisao com player
-		boolean colisaoP1 = player1.verificaColisao(bolaInicial);
-		boolean colisaoP2 = player2.verificaColisao(bolaInicial);
+		//Checa se bateu nas laterais
+		if(bolaInicial.encostaParede(0, alturaJogo)){
+			
+			//Inverte direcao de Y
+			bolaInicial.setDirecaoBolaY(bolaInicial.getDirecaoBolaY() * -1);				
+		}		
+	}
 		
-		//Se colidiu com algum player
-		if(colisaoP1 || colisaoP2){
+	/**
+	 * Em caso de colisão prévia, remaneja as posicoes da bola
+	 */
+	public void remanejaPosicaoBola(Retangulo comparador, Bola bolaRemanejada){
+		
+		//Verifica a colisao
+		if(comparador != null && comparador.verificaColisao(bolaInicial)){
 			
 			//Recebe os dados de quem colidiu
-			float colisaoX = colisaoP1 ? player1.getPosX() : player2.getPosX();
-			float colisaoY = colisaoP1 ? player1.getPosY() : player2.getPosY();
-			float colisaoLargura = colisaoP1 ? player1.getLargura() : player2.getLargura();
-			float colisaoAltura  = colisaoP1 ? player1.getAltura() : player2.getAltura();
+			float colisaoX = comparador.getPosX();
+			float colisaoY = comparador.getPosY();
+			float colisaoLargura = comparador.getLargura();
+			float colisaoAltura  = comparador.getAltura();
 			
 			//Se bolinha estiver na lateral, altera seu X
 			if((bolaInicial.getPosY() <= colisaoY + colisaoAltura) && (bolaInicial.getPosY() >= colisaoY)){
 				
 				//Altera a posicao depentendo de o circulo estiver a direita ou esquerda do elemento
 				if(bolaInicial.getPosX() <= colisaoX){
-					bolaInicial.setPosX(colisaoX - bolaInicial.getRaio());
+					bolaRemanejada.setPosX(colisaoX - bolaInicial.getRaio());
 				}
 				else{
-					bolaInicial.setPosX(colisaoX + colisaoLargura  + bolaInicial.getRaio());
+					bolaRemanejada.setPosX(colisaoX + colisaoLargura  + bolaInicial.getRaio());
 				}
 			}
 			//Se a bolinha estiver acima ou abaixo, altera apenas seu Y
@@ -363,25 +339,127 @@ public class BaseJogo implements Jogo {
 			
 				//Altera a posicao depentendo de o circulo estiver acima ou abaixo
 				if(bolaInicial.getPosY() <= colisaoY){
-					bolaInicial.setPosY(colisaoY - bolaInicial.getRaio());
+					bolaRemanejada.setPosY(colisaoY - bolaInicial.getRaio());
 				}
 				else{
-					bolaInicial.setPosY(colisaoY + colisaoAltura  + bolaInicial.getRaio());
+					bolaRemanejada.setPosY(colisaoY + colisaoAltura  + bolaInicial.getRaio());
 				}					
-			}
+			}			
 		}
+	}
+	
+	/**
+	 * Em caso de colisão prévia com as laterais, remaneja as posicoes da bola
+	 */
+	public void remanejaPosicaoBolaLaterais(Bola bolaRemanejada){
+		
 		//Checa se bateu nas laterais
-		else if(bolaInicial.encostaParede(0, alturaJogo)){
+		if(bolaInicial.encostaParede(0, alturaJogo)){
 			
 			//Remaneja posicao Y da bolinha de acordo com o local da colisao
 			if(bolaInicial.getPosY() < (alturaJogo / 2)){
-				bolaInicial.setPosY(bolaInicial.getRaio());
+				bolaRemanejada.setPosY(bolaInicial.getRaio());
 			}
 			else{
-				bolaInicial.setPosY(alturaJogo - bolaInicial.getRaio());
+				bolaRemanejada.setPosY(alturaJogo - bolaInicial.getRaio());
 			}
 		}
 	}	
+	
+	/**
+	 * Checa se a bola bateu em algum elemento, atualizando as posicoes
+	 */
+	public void checagemColisaoElemento(Retangulo comparador, Bola bolaRemanejada){
+		
+		//Verifica a colisao
+		if(comparador != null && comparador.verificaColisao(bolaInicial)){
+			
+			//Define que houve colisao
+			comparador.setColidiu(true);
+			
+			//Se for um jogador, aumenta a velocidade da bola
+			if(comparador instanceof Jogador){
+				bolaInicial.aumentaVelocidade();
+			}
+
+			//Inicia distancia do centro dos players com a bola
+			float distanciaCentro = comparador.pontoMedioY() - bolaInicial.getPosY();			
+			
+			//Inverte direcao de X
+			bolaInicial.setDirecaoBolaX(bolaInicial.getDirecaoBolaX() * -1);				
+			
+			//Se não for zero
+			if(distanciaCentro != 0){
+				
+				//Define a direcao do movimento
+				bolaInicial.setDirecaoBolaY(distanciaCentro < 0 ? 1 : -1);						
+				
+				//Recebe o modulo da distancia
+				distanciaCentro = distanciaCentro < 0 ? distanciaCentro * -1 : distanciaCentro;
+				
+				//Recebe o resto com a diferença da velocidade
+				distanciaCentro = distanciaCentro % bolaInicial.getVelocidadeMovimento();
+				
+				//Define o escalar
+				bolaInicial.setEscalarY(distanciaCentro);
+			}		
+		}
+	}
+	
+	/**
+	 * Contem todas as verificacos sobre a atualizacao da bola inicial
+	 */
+	public void atualizaBolaInicial(){
+
+		//Inicia uma instancia de bola, que vai receber o remanejamento da bola principal, para suavizar a animação de bater nas extremidades de elementos
+		Bola bolaTemporaria = new Bola();
+		bolaTemporaria.setPosX(-1f);
+		bolaTemporaria.setPosY(-1f);
+		
+		//Se a bola encosta em uma deadzone
+		checagemBolaInicialDeadzone();
+		
+		//Recebe o resultado da verificacao de colisao com player
+		checagemColisaoElemento(player1, bolaTemporaria);
+		checagemColisaoElemento(player2, bolaTemporaria);
+
+		//Verifica colisao com todos elementos da lista
+		if(!elementosAvulsos.isEmpty()){
+			for(Elemento elemento : elementosAvulsos){
+				
+				//Se o elemento for um retangulo, verifica colisao
+				if(elemento instanceof Retangulo){
+					checagemColisaoElemento((Retangulo) elemento, bolaTemporaria);
+				}
+			}
+		}
+		
+		//Checa se bateu em alguma parede
+		checagemBolaInicialParedes();
+		
+		//Atualiza seu movimento
+		bolaInicial.movimenta();
+		
+		//Tenta inserir dados na bola temporaria
+		remanejaPosicaoBolaLaterais(bolaTemporaria);
+		remanejaPosicaoBola(player1, bolaTemporaria);
+		remanejaPosicaoBola(player2, bolaTemporaria);
+		if(!elementosAvulsos.isEmpty()){
+			for(Elemento elemento : elementosAvulsos){
+				if(elemento instanceof Retangulo){
+					remanejaPosicaoBola((Retangulo) elemento, bolaTemporaria);
+				}
+			}
+		}		
+		
+		//Ao mover a bola, pode ocorrer uma colisão em que a bola entra no elemento, sua posicao deve ser remanejada nesse caso
+		if(bolaTemporaria.getPosX() >= 0.0f){
+			bolaInicial.setPosX(bolaTemporaria.getPosX());
+		}
+		else if(bolaTemporaria.getPosY() >= 0.0f){
+			bolaInicial.setPosY(bolaTemporaria.getPosY());
+		}
+	}
 	
 	//Realiza logica de inclinação da bola, quando ocorre colisao com players
 	public void inclinaBolaColisao(boolean colisaoP1, boolean colisaoP2){
@@ -531,5 +609,13 @@ public class BaseJogo implements Jogo {
 
 	public void setElementosAvulsos(List<Elemento> elementosAvulsos) {
 		this.elementosAvulsos = elementosAvulsos;
+	}
+
+	public int getPontosPartida() {
+		return pontosPartida;
+	}
+
+	public void setPontosPartida(int pontosPartida) {
+		this.pontosPartida = pontosPartida;
 	}	
 }
