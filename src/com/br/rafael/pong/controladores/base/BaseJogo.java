@@ -21,6 +21,11 @@ import com.br.rafael.pong.elementos.pong.Jogador;
  */
 public class BaseJogo implements Jogo {
 
+	//Constantes estaticas que ajudam na gerencia do jogo
+	public static int VALOR_NULO = 0;
+	public static int PLAYER_01 = 1;
+	public static int PLAYER_02 = 2;
+	
 	//Mantem flag que configura jogo multiplayer ou single
 	private boolean multiplayer = false;
 	
@@ -534,7 +539,48 @@ public class BaseJogo implements Jogo {
 	 */
 	public void acaoModalFinaliza(){
 		
+		//Reinicia o jogo e fecha a modal
+		setFimJogo(false);		
 	}	
+
+	/**
+	 * Checa se algum dos jogadores ganhou a partida
+	 */
+	public int verificaGanhadores(){
+		if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida()){
+			return PLAYER_01;
+		}
+		else if(getPlayer2() != null && getPlayer2().getPlacar().getPontuacao() == getPontosPartida()){
+			return PLAYER_02;
+		}
+		return VALOR_NULO;
+	}
+	
+	/**
+	 * Verificações padronizadas para fim de jogo, utilizada para jogos com 2 players
+	 */
+	public void acoesVitoriaVersus(Canvas canvas, Paint paint){
+		
+		//Se há ganhadores
+		if(verificaGanhadores() != VALOR_NULO){
+			
+			//Define flag que para o jogo
+			setFimJogo(true);
+			
+			//Atualiza mais uma vez a tela
+			atualiza();
+			
+			//Exibe saida para o usuario
+			terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == getPontosPartida()));
+			
+			//Se o player 1 ganhou
+			if(verificaGanhadores() == PLAYER_01){
+				
+				//Sinaliza que o jogador ganhou, e o proximo toque deve leva-lo para a proxima fase
+				setProximaFase(true);
+			}			
+		}
+	}
 	
 	/* Getters e Setters padrão */
 	public float getMetadeTelaX(){

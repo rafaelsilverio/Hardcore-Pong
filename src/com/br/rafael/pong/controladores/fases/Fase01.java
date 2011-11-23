@@ -44,25 +44,7 @@ public class Fase01 extends BaseJogo {
 		if(!isFimJogo()){			
 			
 			//Verifica se alguem ganhou
-			if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida() || getPlayer2().getPlacar().getPontuacao() == getPontosPartida()){
-				
-				//Define flag que para o jogo
-				setFimJogo(true);
-				
-				//Atualiza mais uma vez a tela
-				super.atualiza();
-				
-				//Exibe saida para o usuario
-				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == getPontosPartida()));
-				
-				//Se o player 1 ganhou
-				if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida()){
-					
-					//Sinaliza que o jogador ganhou, e o proximo toque deve leva-lo para a proxima fase
-					setProximaFase(true);
-				}
-				
-			}
+			acoesVitoriaVersus(canvas, paint);
 		}
 		else {
 			

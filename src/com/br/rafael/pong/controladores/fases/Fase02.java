@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.br.rafael.pong.controladores.base.BaseJogo;
-import com.br.rafael.pong.elementos.bases.Retangulo;
+import com.br.rafael.pong.elementos.pong.BlocoQuebravel;
 
 public class Fase02 extends BaseJogo {
 
@@ -31,15 +31,22 @@ public class Fase02 extends BaseJogo {
 		setPontosPartida(PONTOS_PARTIDA);
 		
 		//Define as cores dos players
-		getPlayer2().defineCores(255, 0, 0, 255);
+		getPlayer2().defineCores(255, 255, 0, 0);
 		
 		//Corta a velocidade da maquina
 		getPlayer2().setVelocidadeMovimento(getPlayer2().getVelocidadeMovimento() * 0.5f);
 		
-		//Cria uma barra de defesa para o p2
-		Retangulo defesa = new Retangulo(getPlayer2().getPosX() - getPlayer2().getLargura() , getPlayer2().getPosY() + getPlayer2().getAltura(),  getPlayer2().getAltura(), getPlayer2().getLargura());
-		defesa.defineCores(255, 201, 201, 201);
+		//Cria as barras de defesa para o p2
+		BlocoQuebravel defesa = new BlocoQuebravel(getPlayer2().getPosX() - getPlayer2().getLargura() , 
+				getAlturaJogo() - getPlayer2().getAltura(),  
+				getPlayer2().getAltura(), 
+				getPlayer2().getLargura());
 		getElementosAvulsos().add(defesa);
+		BlocoQuebravel defesa2 = new BlocoQuebravel(getPlayer2().getPosX() - getPlayer2().getLargura() , 
+				0,  
+				getPlayer2().getAltura(), 
+				getPlayer2().getLargura());
+		getElementosAvulsos().add(defesa2);		
 	}
 
 	@Override
@@ -50,17 +57,7 @@ public class Fase02 extends BaseJogo {
 		if(!isFimJogo()){			
 			
 			//Verifica se alguem ganhou
-			if(getPlayer1().getPlacar().getPontuacao() == getPontosPartida() || getPlayer2().getPlacar().getPontuacao() == getPontosPartida()){
-				
-				//Define flag que para o jogo
-				setFimJogo(true);
-				
-				//Atualiza mais uma vez a tela
-				super.atualiza();
-				
-				//Exibe saida para o usuario
-				super.terminaPartida(canvas, paint, (getPlayer1().getPlacar().getPontuacao() == getPontosPartida()));
-			}
+			acoesVitoriaVersus(canvas, paint);
 		}
 		else {
 			
