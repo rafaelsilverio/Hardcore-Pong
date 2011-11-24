@@ -23,6 +23,10 @@ public class TransitaAtributos {
 	//Declara atributo que armazena se o celular é cliente ou servidor
 	private static int papelMultiplayer = 0;
 	
+	//Mantem as dimensoes do celular
+	private static int alturaCelular;
+	private static int larguraCelular;
+	
 	/* Getters e setters gerados */
 	public static BluetoothSocket getSocketConexao() {
 		return socketConexao;
@@ -47,5 +51,17 @@ public class TransitaAtributos {
 	}
 	public static void setInstanciaProximaFase(Jogo instanciaProximaFase) {
 		TransitaAtributos.instanciaProximaFase = instanciaProximaFase;
+	}
+	public static int getAlturaCelular() {
+		return alturaCelular;
+	}
+	public static void setAlturaCelular(int alturaCelular) {
+		TransitaAtributos.alturaCelular = alturaCelular;
+	}
+	public static int getLarguraCelular() {
+		return larguraCelular;
+	}
+	public static void setLarguraCelular(int larguraCelular) {
+		TransitaAtributos.larguraCelular = larguraCelular;
 	}
 }

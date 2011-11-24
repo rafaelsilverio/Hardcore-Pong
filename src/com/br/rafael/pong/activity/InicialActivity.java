@@ -2,12 +2,17 @@ package com.br.rafael.pong.activity;
 
 import java.util.UUID;
 
+import com.br.rafael.util.TransitaAtributos;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +39,11 @@ public class InicialActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicial);
+        
+        //Recebe as dimensoes do celular
+		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        TransitaAtributos.setAlturaCelular(display.getHeight());
+        TransitaAtributos.setLarguraCelular(display.getWidth());
         
         //Inicia o adaptador
         adaptadorBT = BluetoothAdapter.getDefaultAdapter();
