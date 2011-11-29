@@ -1,11 +1,11 @@
 package com.br.rafael.pong.multiplayer.controladores;
 
-import com.br.rafael.pong.controladores.JogoPrincipal;
+import com.br.rafael.pong.controladores.base.BaseJogo;
 import com.br.rafael.pong.elementos.pong.Jogador;
 import com.br.rafael.pong.multiplayer.threads.MultiplayerGame;
 import com.br.rafael.util.TransitaAtributos;
 
-public class JogoMultiplayer extends JogoPrincipal {
+public class JogoMultiplayer extends BaseJogo {
 
 	//Declara os tipos de mensagens que devem ser enviadas
 	public final static String MOVIMENTANDO_ACIMA = "U";
@@ -33,6 +33,10 @@ public class JogoMultiplayer extends JogoPrincipal {
 			getAcaoDescer().setPosX(larguraJogo - getAcaoDescer().getLargura());
 			getAcaoSubir().setPosX(larguraJogo - getAcaoSubir().getLargura());
 		}
+		
+		//Define cores dos players
+		getPlayer1().defineCores(255, 0,255,0);
+		getPlayer2().defineCores(255, 0,255,0);
 	}
 	
 	/**

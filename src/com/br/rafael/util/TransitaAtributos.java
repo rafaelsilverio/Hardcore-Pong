@@ -2,7 +2,7 @@ package com.br.rafael.util;
 
 import android.bluetooth.BluetoothSocket;
 
-import com.br.rafael.pong.controladores.base.Jogo;
+import com.br.rafael.pong.controladores.base.BaseJogo;
 
 /**
  * Classe que tem o objetivo de transitar atributos entre Activitys
@@ -18,7 +18,7 @@ public class TransitaAtributos {
 	
 	//Declara qual deve ser a fase atual
 	private static int faseAtual;
-	private static Jogo instanciaProximaFase;
+	private static BaseJogo instanciaProximaFase;
 	
 	//Declara atributo que armazena se o celular é cliente ou servidor
 	private static int papelMultiplayer = 0;
@@ -46,10 +46,10 @@ public class TransitaAtributos {
 	public static void setFaseAtual(int faseAtual) {
 		TransitaAtributos.faseAtual = faseAtual;
 	}
-	public static Jogo getInstanciaProximaFase() {
+	public static BaseJogo getInstanciaProximaFase() {
 		return instanciaProximaFase;
 	}
-	public static void setInstanciaProximaFase(Jogo instanciaProximaFase) {
+	public static void setInstanciaProximaFase(BaseJogo instanciaProximaFase) {
 		TransitaAtributos.instanciaProximaFase = instanciaProximaFase;
 	}
 	public static int getAlturaCelular() {

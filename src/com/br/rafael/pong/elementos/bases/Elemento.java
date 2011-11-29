@@ -22,6 +22,9 @@ public class Elemento {
 	private int verde = 255;
 	private int azul = 255;
 	
+	//Mantem um atributo que define se o elemento se encontra ou não ativo
+	private boolean ativo = true;
+	
 	/**
 	 * Recebe atributos que alimentam a classe
 	 * 
@@ -105,5 +108,13 @@ public class Elemento {
 	}
 	public void setAzul(int azul) {
 		this.azul = azul;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 }

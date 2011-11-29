@@ -206,7 +206,9 @@ public class Jogador extends Retangulo{
 	public void setColidiu(boolean colidiu) {
 		super.setColidiu(colidiu);
 		
-		//Define janela de frames
-		framesPiscando = numFramesPiscando;
+		//Define janela de frames (se o valor de colisao foi true)
+		if(colidiu){
+			framesPiscando = numFramesPiscando;	
+		}
 	}
 }

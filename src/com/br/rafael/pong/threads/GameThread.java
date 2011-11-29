@@ -4,12 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.SystemClock;
-import android.view.Display;
 import android.view.SurfaceHolder;
-import android.view.WindowManager;
 
-import com.br.rafael.pong.controladores.base.Jogo;
-import com.br.rafael.pong.controladores.fases.Fase01;
+import com.br.rafael.pong.controladores.base.BaseJogo;
 import com.br.rafael.util.TransitaAtributos;
 
 public class GameThread extends Thread {
@@ -23,7 +20,7 @@ public class GameThread extends Thread {
 	//Mantem objetos relativos a manipulacao do jogo
 	private SurfaceHolder superficie;
 	private Paint paint;
-	private Jogo jogoPrincipal;
+	private BaseJogo jogoPrincipal;
 	
 	//Atributo que define que o jogo esta rodando
 	private boolean jogoFinalizado = false;
@@ -80,10 +77,7 @@ public class GameThread extends Thread {
 	public void pararJogo(){
 		jogoFinalizado = true;
 	} 
-	
-	public Jogo getGameState() {
-		return jogoPrincipal;
-	}
+
 
 	public Boolean getMovimentoPressionado() {
 		return movimentoPressionado;
@@ -99,5 +93,13 @@ public class GameThread extends Thread {
 
 	public void setTipoAcao(int tipoAcao) {
 		this.tipoAcao = tipoAcao;
+	}
+
+	public BaseJogo getJogoPrincipal() {
+		return jogoPrincipal;
+	}
+
+	public void setJogoPrincipal(BaseJogo jogoPrincipal) {
+		this.jogoPrincipal = jogoPrincipal;
 	}
 }

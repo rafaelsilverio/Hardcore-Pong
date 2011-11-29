@@ -3,6 +3,7 @@ package com.br.rafael.pong.controladores.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -19,8 +20,11 @@ import com.br.rafael.pong.elementos.pong.Jogador;
  * @author Rafael
  *
  */
-public class BaseJogo implements Jogo {
+public class BaseJogo {
 
+	//Mantem instancia do contexto do jogo
+	private Context context;
+	
 	//Constantes estaticas que ajudam na gerencia do jogo
 	public static int VALOR_NULO = 0;
 	public static int PLAYER_01 = 1;
@@ -376,8 +380,13 @@ public class BaseJogo implements Jogo {
 	 */
 	public void checagemColisaoElemento(Retangulo comparador, Bola bolaRemanejada){
 		
+		//Valida o retangulo
+		if(comparador == null){
+			return;
+		}
+			
 		//Verifica a colisao
-		if(comparador != null && comparador.verificaColisao(bolaInicial)){
+		if(comparador.verificaColisao(bolaInicial)){
 			
 			//Define que houve colisao
 			comparador.setColidiu(true);
@@ -408,6 +417,10 @@ public class BaseJogo implements Jogo {
 				//Define o escalar
 				bolaInicial.setEscalarY(distanciaCentro);
 			}		
+		}
+		//Indica que não houve colisao
+		else{
+			comparador.setColidiu(false);
 		}
 	}
 	
@@ -663,5 +676,13 @@ public class BaseJogo implements Jogo {
 
 	public void setPontosPartida(int pontosPartida) {
 		this.pontosPartida = pontosPartida;
+	}
+
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
 	}	
 }

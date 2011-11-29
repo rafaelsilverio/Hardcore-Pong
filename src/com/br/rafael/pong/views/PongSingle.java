@@ -54,7 +54,7 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		//Recebe a instancia do jogo
-		BaseJogo jogoAtual = (BaseJogo) threadJogo.getGameState();
+		BaseJogo jogoAtual = (BaseJogo) threadJogo.getJogoPrincipal();
 		
 		//Sinaliza para a thread o estado atual da tela
 		jogoAtual.getPlayer1().setMovimento(telaPressionada);
