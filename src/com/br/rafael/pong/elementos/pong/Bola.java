@@ -161,6 +161,21 @@ public class Bola extends Circulo {
 	}
 	
 	/**
+	 * Aumenta ao maximo avelocidade para a bola, incrementado de acordo com o acelerador.
+	 * Caso chamada duas vezes, a 2a chamada não faz nada.
+	 */
+	public void aumentaVelocidadeMaxima(){
+		
+		//Incrementa a velocidade apenas se não foi aumentada no máximo
+		if(numeroMaximoAceleracoes > 0){
+			velocidadeMovimento = velocidadeMovimento + (numeroMaximoAceleracoes * aceleradorMovimento);
+			
+			//Zera o numero maximo de aceleracoes
+			numeroMaximoAceleracoes = 0;
+		}
+	}	
+	
+	/**
 	 * Reduz a coloracao de verde da bola
 	 */
 	public void reduzColoracao(){
@@ -226,5 +241,13 @@ public class Bola extends Circulo {
 
 	public void setNumeroMaximoAceleracoes(int numeroMaximoAceleracoes) {
 		this.numeroMaximoAceleracoes = numeroMaximoAceleracoes;
+	}
+
+	public int getCopiaNumeroMaximoAceleracoes() {
+		return copiaNumeroMaximoAceleracoes;
+	}
+
+	public float getCopiaVelocidadeMovimento() {
+		return copiaVelocidadeMovimento;
 	}
 }

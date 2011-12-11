@@ -32,6 +32,13 @@ public class BlocoQuebravel extends Retangulo{
 	private int direcaoMovimento = 1;
 	private float velocidadeMovimento;
 	
+	//Mantem o tipo do bloco, caso ele cause algum efeito na bola em caso de colisao
+	private Integer tipoBlocoEfeitoColisao = null;
+	
+
+	//Mantem uma referencia da bola principal do jogo
+	private Bola bola;	
+	
 	
 	/**
 	 * Instancia o bloco
@@ -99,6 +106,9 @@ public class BlocoQuebravel extends Retangulo{
 	@Override
 	public void desenha(Canvas canvas, Paint paint){
 		
+		//Mantem uma flag que define que o bloco bateu em extremidades
+		boolean inverteMovimento = false;
+		
 		//Se é para movimentar
 		if(movimento){
 			
@@ -115,6 +125,7 @@ public class BlocoQuebravel extends Retangulo{
 						}
 						else{
 							direcaoMovimento *= -1;
+							inverteMovimento = true;
 						}
 
 					}
@@ -128,10 +139,48 @@ public class BlocoQuebravel extends Retangulo{
 						}	
 						else {
 							direcaoMovimento *= -1;
+							inverteMovimento = true;
 						}
 					}
 					break;
 			}
+		}
+		
+		//Se é para aplicar efeitos no bloco, realiza as acoes necessárias
+		if(tipoBlocoEfeitoColisao != null) {
+
+				switch(tipoBlocoEfeitoColisao){
+					case BlocoEfeito.ACELERADOR:
+
+						//Se houve colisao, altera o estado da bola
+						if(isColidiu()){
+							bola.aumentaVelocidadeMaxima();
+							bola.setVerde(0);
+						}
+						
+						//Altera o tipo do efeito, se bateu nas extremidades
+						if(inverteMovimento){
+							tipoBlocoEfeitoColisao = BlocoEfeito.DESACELERADOR;
+							defineCores(255, 0, 0, 255);
+						}						
+						break;
+						
+					case BlocoEfeito.DESACELERADOR:
+						
+						//Se houve colisao, altera o estado da bola
+						if(isColidiu()){
+							bola.setNumeroMaximoAceleracoes(bola.getCopiaNumeroMaximoAceleracoes());
+							bola.setVelocidadeMovimento(bola.getCopiaVelocidadeMovimento());
+							bola.setVerde(255);
+						}
+						
+						//Altera o tipo do efeito, se bateu nas extremidades
+						if(inverteMovimento){
+							tipoBlocoEfeitoColisao = BlocoEfeito.ACELERADOR;
+							defineCores(255, 255, 0, 0);
+						}						
+						break;					
+				}
 		}
 		
 		//Chama desenhar do pai
@@ -198,6 +247,21 @@ public class BlocoQuebravel extends Retangulo{
 	public void setBlocoImortal(boolean blocoImortal) {
 		this.blocoImortal = blocoImortal;
 	}
-	
+
+	public Integer getTipoBlocoEfeitoColisao() {
+		return tipoBlocoEfeitoColisao;
+	}
+
+	public void setTipoBlocoEfeitoColisao(Integer tipoBlocoEfeitoColisao) {
+		this.tipoBlocoEfeitoColisao = tipoBlocoEfeitoColisao;
+	}
+
+	public Bola getBola() {
+		return bola;
+	}
+
+	public void setBola(Bola bola) {
+		this.bola = bola;
+	}
 	
 }

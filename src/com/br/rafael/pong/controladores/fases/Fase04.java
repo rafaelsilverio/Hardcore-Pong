@@ -50,89 +50,24 @@ public class Fase04  extends BaseJogo {
 				getPlayer2().getLargura());
 		defesa2.setVida(defesa2.getVida() * 2);
 		
-		
 		//Instancia e registra bloco movivel
 		float alturaBloco = getPlayer2().getAltura()/2;
 		BlocoQuebravel blocoMovivel = new BlocoQuebravel(defesa.getPosX() - getPlayer2().getLargura(),
 				(getAlturaJogo()/2) - alturaBloco, 
 				alturaBloco, 
 				 getPlayer2().getLargura());
+		blocoMovivel.setBola(getBolaInicial());
 		blocoMovivel.setMovimento(true);
 		blocoMovivel.setVelocidadeMovimento(getPlayer1().getVelocidadeMovimento() / 2);
 		blocoMovivel.setMovimentoAtual(BlocoQuebravel.MOVIMENTO_AUTO_VERTICAL);
 		blocoMovivel.setBlocoImortal(true);
-		blocoMovivel.defineCores(blocoMovivel.getAlpha(), 47, 79, 79);
+		blocoMovivel.setTipoBlocoEfeitoColisao(BlocoEfeito.DESACELERADOR);
+		blocoMovivel.defineCores(255, 0, 0, 255);
 		
 		//Registra os elementos
 		getElementosAvulsos().add(defesa);
 		getElementosAvulsos().add(defesa2);	
 		getElementosAvulsos().add(blocoMovivel);
-		
-		
-		//Define os valores de bola de efeito
-		float posx = blocoMovivel.getPosX() - getPlayer1().getLargura();
-		float posy = getAlturaJogo() / 8;
-		float largura = getPlayer1().getLargura();
-		
-		//Cria os blocos de efeito
-		BlocoEfeito efeito1 = new BlocoEfeito(BlocoEfeito.ACELERADOR, getBolaInicial(), 
-				posx, 
-				0 * posy, 
-				posy, 
-				largura);
-		efeito1.defineCores(255, 255, 0, 0);
-		BlocoEfeito efeito2 = new BlocoEfeito(BlocoEfeito.DESACELERADOR, getBolaInicial(), 
-				posx, 
-				1 * posy, 
-				posy, 
-				largura);
-		efeito2.defineCores(255, 0, 0, 255);		
-		BlocoEfeito efeito3 = new BlocoEfeito(BlocoEfeito.ACELERADOR, getBolaInicial(), 
-				posx, 
-				2 * posy, 
-				posy, 
-				largura);
-		efeito3.defineCores(255, 255, 0, 0);		
-		BlocoEfeito efeito4 = new BlocoEfeito(BlocoEfeito.DESACELERADOR, getBolaInicial(), 
-				posx, 
-				3 * posy, 
-				posy, 
-				largura);
-		efeito4.defineCores(255, 0, 0, 255);		
-		BlocoEfeito efeito5 = new BlocoEfeito(BlocoEfeito.ACELERADOR, getBolaInicial(), 
-				posx, 
-				4 * posy, 
-				posy, 
-				largura);
-		efeito5.defineCores(255, 255, 0, 0);
-		BlocoEfeito efeito6 = new BlocoEfeito(BlocoEfeito.DESACELERADOR, getBolaInicial(), 
-				posx, 
-				5 * posy, 
-				posy, 
-				largura);
-		efeito6.defineCores(255, 0, 0, 255);			
-		BlocoEfeito efeito7 = new BlocoEfeito(BlocoEfeito.ACELERADOR, getBolaInicial(), 
-				posx, 
-				6 * posy, 
-				posy, 
-				largura);
-		efeito7.defineCores(255, 255, 0, 0);		
-		BlocoEfeito efeito8 = new BlocoEfeito(BlocoEfeito.DESACELERADOR, getBolaInicial(), 
-				posx, 
-				7 * posy, 
-				posy, 
-				largura);
-		efeito8.defineCores(255, 0, 0, 255);			
-		
-		//Registra os blocos
-		getElementosAvulsos().add(efeito1);
-		getElementosAvulsos().add(efeito2);
-		getElementosAvulsos().add(efeito3);
-		getElementosAvulsos().add(efeito4);
-		getElementosAvulsos().add(efeito5);
-		getElementosAvulsos().add(efeito6);
-		getElementosAvulsos().add(efeito7);
-		getElementosAvulsos().add(efeito8);
 	}
 
 	@Override
