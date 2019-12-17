@@ -7,10 +7,10 @@ import com.br.rafael.pong.elementos.bases.Elemento;
 
 public class Placar extends Elemento {
 
-	//Declara pontuação
+	//Declara pontuacao
 	private Integer pontuacao = new Integer(0);
 	
-	//Declara texto da pontuação
+	//Declara texto da pontuacao
 	private String textoPlacar;
 	
 	//Declara tamanho do texto
@@ -29,7 +29,7 @@ public class Placar extends Elemento {
 	}
 	
 	/**
-	 * Aumenta a pontuação do placar
+	 * Aumenta a pontuacao do placar
 	 */
 	public void aumentaPontos(){
 		pontuacao = pontuacao + 1;

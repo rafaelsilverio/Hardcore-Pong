@@ -9,9 +9,9 @@ import android.bluetooth.BluetoothSocket;
 import com.br.rafael.pong.activity.OpcoesMultiplayerActivity;
 
 /**
- * Classe responsavel por receber uma conexão como servidor
- * de bluetooth. Assim que uma conexão é recebida, uma nova
- * thread é chamada 
+ * Classe responsavel por receber uma conexao como servidor
+ * de bluetooth. Assim que uma conexao e recebida, uma nova
+ * thread e chamada
  *  
  * @author Rafael
  *

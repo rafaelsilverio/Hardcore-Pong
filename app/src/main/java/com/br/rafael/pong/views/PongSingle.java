@@ -13,10 +13,10 @@ import com.br.rafael.pong.threads.GameThread;
 
 public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 
-	//Mantem uma instância da thread que gerencia o jogo
+	//Mantem uma instancia da thread que gerencia o jogo
 	private GameThread threadJogo;
 	
-    //Mantem flag que diz se a tela esta sendo pressionada pelo usuário do telefone
+    //Mantem flag que diz se a tela esta sendo pressionada pelo usuario do telefone
     private Boolean telaPressionada = false;	
 	
     //Mantem a instancia da atividade atual
@@ -46,7 +46,7 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 			//Sinaliza flag 
 			telaPressionada = true;
 		}
-		//O flag so será definido como falso se o usuário largar a tela
+		//O flag so sera definido como falso se o usuario largar a tela
 		else if(event.getAction() == MotionEvent.ACTION_UP){
 			
 			//Sinaliza flag 
@@ -74,7 +74,7 @@ public class PongSingle extends SurfaceView implements SurfaceHolder.Callback {
 			else
 				jogoAtual.getPlayer1().setMovimentoAtual(Jogador.MOVIMENTO_NULO);
 			
-			//Se o jogo se encontra parado e o usuário tocar no modal, chama a ação correspondente
+			//Se o jogo se encontra parado e o usuario tocar no modal, chama a acao correspondente
 			if(jogoAtual.isFimJogo() && jogoAtual.getModalFimJogo().verificaColisao(event.getX(), event.getY())){
 				jogoAtual.acaoModalFinaliza();
 				

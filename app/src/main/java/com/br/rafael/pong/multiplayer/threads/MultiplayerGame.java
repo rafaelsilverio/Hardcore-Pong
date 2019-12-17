@@ -14,10 +14,10 @@ import com.br.rafael.util.TransitaAtributos;
 
 public class MultiplayerGame extends Thread{
 
-	//Declara flag que define se o botão foi pressionado, sinalizando para o estado do jogo mover a peça
+	//Declara flag que define se o botao foi pressionado, sinalizando para o estado do jogo mover a peca
 	private Boolean movimentoPressionado = false;
 	
-	//Mantem qual movimento deve ser feito, para os casos em que há botão pressionado
+	//Mantem qual movimento deve ser feito, para os casos em que ha botao pressionado
 	private int tipoAcao;
 	
 	//Mantem objetos relativos a manipulacao do jogo
@@ -64,7 +64,7 @@ public class MultiplayerGame extends Thread{
 	}
 
 	/**
-	 * Método executado ao ser chamado o start,
+	 * Metodo executado ao ser chamado o start,
 	 * atualiza os estados do jogo
 	 */
 	@Override
@@ -79,7 +79,7 @@ public class MultiplayerGame extends Thread{
 			//Define consistencia de pausa da thread, apenas para servidores
 			if(TransitaAtributos.getPapelMultiplayer() == MultiplayerGame.SERVIDOR){
 				
-				//Se a thread esta pausada, e já se passou alguns frames, libera a thread
+				//Se a thread esta pausada, e ja se passou alguns frames, libera a thread
 				if(pausaThread && (SystemClock.uptimeMillis() - tempoUltimoFrame > (2 * milisegundos))){
 					
 					//Libera a thread
@@ -87,7 +87,7 @@ public class MultiplayerGame extends Thread{
 				}
 			}
 
-			//Se é para pausar a thread, pula o loop 
+			//Se e para pausar a thread, pula o loop
 			if(pausaThread)
 				continue;			
 			
@@ -97,13 +97,13 @@ public class MultiplayerGame extends Thread{
 			//Recebe o inicio da contagem
 			final long tempoInicio = SystemClock.uptimeMillis();
 			
-			//Realiza as ações relativa ao papel do celular de servidor
+			//Realiza as acoes relativa ao papel do celular de servidor
 			if(TransitaAtributos.getPapelMultiplayer() == MultiplayerGame.SERVIDOR){
 
 				//Sincroniza a pausa da thread
 				synchronized(pausaThread){
 
-					//Se é para atualizar e enviar, realiza a acao e coloca a thread em espera
+					//Se e para atualizar e enviar, realiza a acao e coloca a thread em espera
 					if(atualizaEEnviaDados){
 
 						//Sinaliza pausa da thread
@@ -151,13 +151,13 @@ public class MultiplayerGame extends Thread{
 				}
 			}
 			
-			//Se é cliente
+			//Se e cliente
 			else if(TransitaAtributos.getPapelMultiplayer() == MultiplayerGame.CLIENTE){
 				
 				//Se tem coisas a desenhar
 				if(dadosDesenho){
 					
-					//Sinaliza ao servidor que os dados já chegaram
+					//Sinaliza ao servidor que os dados ja chegaram
 					atividadeAtual.enviaDados(JogoMultiplayer.RESPOSTA_CLIENTE);
 					
 					//Cria um objeto canvas representando a tela (travando a superficie)

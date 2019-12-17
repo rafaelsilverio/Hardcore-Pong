@@ -52,7 +52,7 @@ public class ClienteBluetooth extends Thread{
 	//Metodo de start da thread
     public void run() {
     	
-    	//Cancela discovery, pois é inutil para client
+    	//Cancela discovery, pois e inutil para client
     	btCelular.cancelDiscovery();
     	
     	//Tenta conectar os aparelhos

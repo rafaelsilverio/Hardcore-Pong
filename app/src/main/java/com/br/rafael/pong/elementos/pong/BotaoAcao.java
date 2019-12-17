@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import com.br.rafael.pong.elementos.bases.Retangulo;
 
 /**
- * Define um botão de ação, que é utilizado pelo usuário para interagir com 
+ * Define um botao de acao, que e utilizado pelo usuario para interagir com
  * o jogo
  * 
  * @author Rafael
@@ -71,16 +71,16 @@ public class BotaoAcao extends Retangulo {
 		//Determina booleano se deve exibir o botao
 		boolean exibeBotao = (!desaparecer || (desaparecer && (getAlpha() > 0))); 
 
-		//Se é para exibir o botao
+		//Se e para exibir o botao
 		if(exibeBotao){
 			
-			//Se há mensagem, desenha na tela
+			//Se ha mensagem, desenha na tela
 			if(mensagem != null){
 				
 				//Recebe as linhas da mensagem
 				String[] linhas = mensagem.split("_");
 				
-				//Percorre as linhas, escrevendo no espaço
+				//Percorre as linhas, escrevendo no espaco
 				int numeroLinha = 1;
 				float tamanhoTexto = getLargura()/6;
 				float margemTextoY = getLargura()/5;

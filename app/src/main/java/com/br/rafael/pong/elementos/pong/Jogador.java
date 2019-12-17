@@ -71,8 +71,8 @@ public class Jogador extends Retangulo{
 	}
 	
 	/**
-	 * Realiza o próximo movimento do jogador, caso ele deva se movimentar
-	 * (como definido pelo atributo movimento), validando se esta ou não
+	 * Realiza o proximo movimento do jogador, caso ele deva se movimentar
+	 * (como definido pelo atributo movimento), validando se esta ou nao
 	 * passando dos limites da tela
 	 * 
 	 * @param float Altura inicial limite 
@@ -83,7 +83,7 @@ public class Jogador extends Retangulo{
 		//Se movimento estiver definido
 		if(movimento){
 
-			//Define qual a ação a ser tomada
+			//Define qual a acao a ser tomada
 			switch(movimentoAtual){
 			
 				case MOVIMENTO_ACIMA:
@@ -126,7 +126,7 @@ public class Jogador extends Retangulo{
 	}
 	
 	/**
-	 * Chama o metodo pai para desenhar na tela, porem já verificando movimentos 
+	 * Chama o metodo pai para desenhar na tela, porem ja verificando movimentos
 	 * a serem feitos.
 	 * 
 	 * @param canvas
@@ -147,7 +147,7 @@ public class Jogador extends Retangulo{
 	}
 	
 	/**
-	 * Realiza ações ao ocorrer uma colisao
+	 * Realiza acoes ao ocorrer uma colisao
 	 */
 	public void acoesColisao(){
 		

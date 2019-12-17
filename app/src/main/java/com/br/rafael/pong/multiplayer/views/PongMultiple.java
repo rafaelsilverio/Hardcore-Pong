@@ -14,10 +14,10 @@ import com.br.rafael.util.TransitaAtributos;
 
 public class PongMultiple extends SurfaceView implements SurfaceHolder.Callback {
 
-	//Mantem uma instância da thread que gerencia o jogo
+	//Mantem uma instancia da thread que gerencia o jogo
 	private static MultiplayerGame threadJogo;
 	
-    //Mantem flag que diz se a tela esta sendo pressionada pelo usuário do telefone
+    //Mantem flag que diz se a tela esta sendo pressionada pelo usuario do telefone
     private Boolean telaPressionada = false;	
 	
     //Mantem instancia da atividade que chama a view
@@ -88,7 +88,7 @@ public class PongMultiple extends SurfaceView implements SurfaceHolder.Callback 
 			//Sinaliza flag 
 			telaPressionada = true;
 		}
-		//O flag so será definido como falso se o usuário largar a tela
+		//O flag so sera definido como falso se o usuario largar a tela
 		else if(event.getAction() == MotionEvent.ACTION_UP){
 			
 			//Sinaliza flag 

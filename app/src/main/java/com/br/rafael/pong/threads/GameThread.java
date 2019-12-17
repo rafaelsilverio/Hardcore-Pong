@@ -11,10 +11,10 @@ import com.br.rafael.util.TransitaAtributos;
 
 public class GameThread extends Thread {
 
-	//Declara flag que define se o botão foi pressionado, sinalizando para o estado do jogo mover a peça
+	//Declara flag que define se o botao foi pressionado, sinalizando para o estado do jogo mover a peca
 	private Boolean movimentoPressionado = false;
 	
-	//Mantem qual movimento deve ser feito, para os casos em que há botão pressionado
+	//Mantem qual movimento deve ser feito, para os casos em que ha botao pressionado
 	private int tipoAcao;
 	
 	//Mantem objetos relativos a manipulacao do jogo
@@ -41,7 +41,7 @@ public class GameThread extends Thread {
 	}
 
 	/**
-	 * Método executado ao ser chamado o start,
+	 * Metodo executado ao ser chamado o start,
 	 * atualiza os estados do jogo
 	 */
 	@Override

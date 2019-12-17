@@ -28,7 +28,7 @@ public class JogoMultiplayer extends BaseJogo {
 		//Seta multiplayer como true
 		setMultiplayer(true);
 		
-		//Se for cliente, reposiciona os botoes de ação
+		//Se for cliente, reposiciona os botoes de acao
 		if(TransitaAtributos.getPapelMultiplayer() == MultiplayerGame.CLIENTE){
 			getAcaoDescer().setPosX(larguraJogo - getAcaoDescer().getLargura());
 			getAcaoSubir().setPosX(larguraJogo - getAcaoSubir().getLargura());
@@ -58,19 +58,19 @@ public class JogoMultiplayer extends BaseJogo {
 			getPlayer2().setMovimentoAtual(Jogador.MOVIMENTO_NULO);				
 		}		
 		
-		//O caso final é quando o aparelho é um cliente e recebe string de atualizacao de posicoes
+		//O caso final e quando o aparelho e um cliente e recebe string de atualizacao de posicoes
 		else{
 			atualizaPosicoesClient(mensagem);
 		}
 	}
 	
 	/**
-	 * Monta uma string com a figura atual do jogo, com as posições de todos os elementos chave.
+	 * Monta uma string com a figura atual do jogo, com as posicoes de todos os elementos chave.
 	 * Utilizado para sincronizar servidor - cliente
 	 */
 	public String retornaPosicoesAtuais(){
 		
-		//Monta a string com as posicoes dos players e da bola, sendo que as posicoes sao frações da dimensao do celular
+		//Monta a string com as posicoes dos players e da bola, sendo que as posicoes sao fracoes da dimensao do celular
 		String snapShot = "";
 		snapShot += getPlayer1().getPosX() / getLarguraJogo() + SEPARADOR_VALORES + getPlayer1().getPosY() / getAlturaJogo() + SEPARADOR_VALORES;
 		snapShot += getPlayer2().getPosX() / getLarguraJogo() + SEPARADOR_VALORES + getPlayer2().getPosY() / getAlturaJogo() + SEPARADOR_VALORES;
@@ -110,7 +110,7 @@ public class JogoMultiplayer extends BaseJogo {
 	}
 	
 	/**
-	 * Atualizações feitas pelo cliente no jogo multiplayer
+	 * Atualizacoes feitas pelo cliente no jogo multiplayer
 	 */
 	public void atualizaJogoClient(){
 		

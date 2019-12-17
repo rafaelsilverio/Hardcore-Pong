@@ -14,7 +14,7 @@ public class TransitaDados extends Thread {
 	//Mantem o socket de conexao
     private final BluetoothSocket socketConexao;
     
-    //Mantem I/O de comunicação
+    //Mantem I/O de comunicacao
     private final InputStream entrada;
     private final OutputStream saida;
 
@@ -28,7 +28,7 @@ public class TransitaDados extends Thread {
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
  
-        //Testa a criação das streams antes de as assimilar nos atributos
+        //Testa a criacao das streams antes de as assimilar nos atributos
         try {
             tmpIn = socket.getInputStream();
             tmpOut = socket.getOutputStream();
@@ -70,7 +70,7 @@ public class TransitaDados extends Thread {
         } catch (IOException e) { }
     }
  
-    //Fecha a conexão
+    //Fecha a conexao
     public void cancel() {
         try {
             socketConexao.close();

@@ -6,7 +6,7 @@ import com.br.rafael.pong.controladores.base.BaseJogo;
 
 /**
  * Classe que tem o objetivo de transitar atributos entre Activitys
- * do android. Pois não há uma maneira de enviar tipos Object.
+ * do android. Pois nao ha uma maneira de enviar tipos Object.
  * 
  * @author Rafael
  *
@@ -20,7 +20,7 @@ public class TransitaAtributos {
 	private static int faseAtual;
 	private static BaseJogo instanciaProximaFase;
 	
-	//Declara atributo que armazena se o celular é cliente ou servidor
+	//Declara atributo que armazena se o celular e cliente ou servidor
 	private static int papelMultiplayer = 0;
 	
 	//Mantem as dimensoes do celular
