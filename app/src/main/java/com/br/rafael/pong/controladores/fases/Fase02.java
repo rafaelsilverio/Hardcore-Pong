@@ -9,7 +9,7 @@ import com.br.rafael.pong.elementos.pong.BlocoQuebravel;
 public class Fase02 extends BaseJogo {
 
 	//Define pontuao para terminar o jogo
-	static final int PONTOS_PARTIDA = 0;	
+	static final int PONTOS_PARTIDA = 5;
 	
 	public Fase02(int alturaJogo, int larguraJogo) {
 		super(alturaJogo, larguraJogo);

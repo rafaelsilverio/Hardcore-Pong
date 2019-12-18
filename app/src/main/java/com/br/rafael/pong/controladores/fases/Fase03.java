@@ -9,7 +9,7 @@ import com.br.rafael.pong.elementos.pong.BlocoQuebravel;
 public class Fase03  extends BaseJogo {
 
 	//Define pontuao para terminar o jogo
-	static final int PONTOS_PARTIDA = 0;	
+	static final int PONTOS_PARTIDA = 5;
 	
 	//Mantem instancia da barra que se move
 	private BlocoQuebravel blocoMovivel;

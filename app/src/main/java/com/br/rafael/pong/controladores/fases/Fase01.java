@@ -8,7 +8,7 @@ import com.br.rafael.pong.controladores.base.BaseJogo;
 public class Fase01 extends BaseJogo {
 
 	//Define pontuao para terminar o jogo
-	static final int PONTOS_PARTIDA = 0;
+	static final int PONTOS_PARTIDA = 5;
 	
 	public Fase01(int alturaJogo, int larguraJogo) {
 		super(alturaJogo, larguraJogo);

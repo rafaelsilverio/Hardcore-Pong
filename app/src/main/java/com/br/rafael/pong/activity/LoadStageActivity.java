@@ -16,6 +16,7 @@ import com.br.rafael.pong.controladores.fases.Fase01;
 import com.br.rafael.pong.controladores.fases.Fase02;
 import com.br.rafael.pong.controladores.fases.Fase03;
 import com.br.rafael.pong.controladores.fases.Fase04;
+import com.br.rafael.pong.controladores.fases.Fase05;
 import com.br.rafael.util.TransitaAtributos;
 
 public class LoadStageActivity  extends Activity {
@@ -48,7 +49,7 @@ public class LoadStageActivity  extends Activity {
 
         //Define textos iniciais
         tituloFase.setText("STAGE 1:");
-        descricaoFase.setText("DEFEAT THE RED BAR BEFORE THE TIME RUNS OUT!\nTHE FIRST ONE TO SCORE 5 POINTS WINS!");
+        descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
         
         //Define os clicks
         iniciarFase.setOnClickListener(new View.OnClickListener() {
@@ -80,14 +81,20 @@ public class LoadStageActivity  extends Activity {
 		switch(TransitaAtributos.getFaseAtual()){
 			case 1:
 				retorno = new Fase02(display.getHeight(), display.getWidth());
+				break;
 			case 2:
 				retorno =  new Fase03(display.getHeight(), display.getWidth());
+				break;
 			case 3:
-				retorno =  new Fase04(display.getHeight(), display.getWidth());					
+				retorno =  new Fase04(display.getHeight(), display.getWidth());
+				break;
+			case 4:
+				retorno =  new Fase05(display.getHeight(), display.getWidth());
+				break;
 			default:
 				retorno =  new Fase01(display.getHeight(), display.getWidth());				
 		}
-		retorno =  new Fase04(display.getHeight(), display.getWidth());	
+
 		//Retorna a intancia
 		return retorno;
     }
@@ -104,19 +111,23 @@ public class LoadStageActivity  extends Activity {
 	    		switch(TransitaAtributos.getFaseAtual()){
 	    			case 1:
 	    	            tituloFase.setText("STAGE 2:");
-	    	            descricaoFase.setText("DEFEAT THE BLUE  BAR BEFORE THE TIME RUNS OUT!\nTHE FIRST ONE TO SCORE 5 POINTS WINS!");
+	    	            descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
 	    	            break;
 	    			case 2:
 	    	            tituloFase.setText("STAGE 3:");
-	    	            descricaoFase.setText("DEFEAT THE BLUE  BAR BEFORE THE TIME RUNS OUT!\nTHE FIRST ONE TO SCORE 5 POINTS WINS!");
+	    	            descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
 	    	            break;
 	    			case 3:
 	    	            tituloFase.setText("STAGE 4:");
-	    	            descricaoFase.setText("DEFEAT THE BLUE  BAR BEFORE THE TIME RUNS OUT!\nTHE FIRST ONE TO SCORE 5 POINTS WINS!");
-	    	            break;	    	            
-	    			default:
+	    	            descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
+	    	            break;
+					case 4:
+						tituloFase.setText("STAGE 5:");
+						descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
+						break;
+					default:
 	    	            tituloFase.setText("STAGE 1:");
-	    	            descricaoFase.setText("DEFEAT THE BLUE  BAR BEFORE THE TIME RUNS OUT!\nTHE FIRST ONE TO SCORE 5 POINTS WINS!");			
+	    	            descricaoFase.setText("THE FIRST ONE TO SCORE 5 POINTS WINS!");
 	    		}	        	
 	        	
         }
